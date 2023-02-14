@@ -4,7 +4,7 @@ import next from "next";
 import cors from "cors";
 import axios from "axios";
 
-const dev = process.env.NODE_ENV === "development";
+const dev = process.env.NODE_ENV === "production";
 const port = 3000;
 const app = next({ dev, port });
 
