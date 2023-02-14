@@ -3,24 +3,38 @@ import Image from "next/image";
 import { Inter } from "@next/font/google";
 import styles from "@/styles/Home.module.css";
 import axios from "axios";
+import { useEffect } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
-  const urlKey =
-    "W87DOAeFblCeoq76UkfcBttIcSgClKzxgmr7P9SxT4dV0s0ugyH1yPAa16ZvPLPNJ5Hpn/Fi7vEVeNZb8DvQQQ==";
-  const apiUrl =
-    "http://openapi.molit.go.kr/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcNrgTrade";
-  const url = `${apiUrl}?serviceKey=${urlKey}&LAWD_CD=11110&DEAL_YMD=202212`;
-  // https://cors-anywhere.herokuapp.com/
+  // const urlKey =
+  //   "W87DOAeFblCeoq76UkfcBttIcSgClKzxgmr7P9SxT4dV0s0ugyH1yPAa16ZvPLPNJ5Hpn/Fi7vEVeNZb8DvQQQ==";
+  // const apiUrl =
+  //   "http://openapi.molit.go.kr/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcNrgTrade";
+  // const url = `${apiUrl}?serviceKey=${urlKey}&LAWD_CD=11110&DEAL_YMD=202212`;
+  // // https://cors-anywhere.herokuapp.com/
+  // const handleData = async () => {
+  //   await axios({
+  //     url,
+  //     method: "get",
+  //   }).then((res) => {
+  //     console.log(res.data);
+  //   });
+  // };
   const handleData = async () => {
-    await axios({
-      url,
-      method: "get",
-    }).then((res) => {
-      console.log(res.data);
-    });
+    try {
+      const { data } = await axios.get("/getRequest");
+      console.log(JSON.parse(data));
+    } catch (e) {
+      console.log(e);
+    }
   };
+
+  useEffect(() => {
+    console.log("helllllloooo222dsfsdfsdfsdfsdf22");
+    handleData();
+  }, []);
   return (
     <>
       <Head>
@@ -30,7 +44,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
-        <button onClick={handleData}>test</button>
+        <button onClick={handleData}>testtesttesfewfesfsfts</button>
       </main>
     </>
   );
