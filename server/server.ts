@@ -4,9 +4,9 @@ import next from "next";
 import cors from "cors";
 import axios from "axios";
 
-const dev = process.env.NODE_ENV === "production";
-const port = 3000;
-const app = next({ dev, port });
+const dev = process.env.NODE_ENV !== "production";
+const port = 3000 || process.env.PORT;
+const app = next({ dev });
 
 const handle = app.getRequestHandler();
 
