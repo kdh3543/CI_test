@@ -13,6 +13,7 @@ const server = express();
 server.use(cors());
 app.prepare().then(() => {
   server.get("/getRequest", async (req, res) => {
+    console.log(server);
     const apiUrl =
       "http://openapi.molit.go.kr/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcNrgTrade";
     const urlKey =
