@@ -30,6 +30,15 @@ export default function Home() {
       console.log(e);
     }
   };
+
+  const expressTest = async () => {
+    try {
+      const { data } = await axios.get("/getTest");
+      console.log(JSON.parse(data));
+    } catch (e) {
+      console.log(e);
+    }
+  };
   // const callChatApi = async () => {
   //   try {
   //     const { data } = await axios.get(
@@ -42,6 +51,7 @@ export default function Home() {
 
   useEffect(() => {
     console.log("helllllloooo222dsfsdfsdfsdfsdf22");
+    expressTest();
     handleData();
   }, []);
   return (

@@ -14,7 +14,6 @@ const server = express();
 server.use(cors());
 app.prepare().then(() => {
   server.get("/getRequest", async (req, res) => {
-    console.log(server);
     const apiUrl =
       "http://openapi.molit.go.kr/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcNrgTrade";
     const urlKey = process.env.NEXT_PUBLIC_URLKEY;
@@ -27,6 +26,10 @@ app.prepare().then(() => {
     // return res.status(200).json({ data: "hello" });
   });
 
+  server.get("/getTest", async (req, res) => {
+    const test = { name: "hello" };
+    return res.status(200).json(JSON.stringify(test));
+  });
   server.get("/getChatApi", async (req, res) => {
     const apiKey = "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";
     const openai = new OpenAI(apiKey);
