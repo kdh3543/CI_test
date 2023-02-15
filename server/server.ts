@@ -7,7 +7,7 @@ import axios from "axios";
 const dev = process.env.NODE_ENV !== "production";
 const prod = process.env.NODE_ENV === "production";
 const port = prod ? process.env.PORT : 3000;
-const app = next({ dev });
+const app = next({ dev } || { prod });
 
 const handle = app.getRequestHandler();
 

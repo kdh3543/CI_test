@@ -17,7 +17,7 @@ const next_1 = __importDefault(require("next"));
 const dev = process.env.NODE_ENV !== "production";
 const prod = process.env.NODE_ENV === "production";
 const port = prod ? process.env.PORT : 3000;
-const app = (0, next_1.default)({ dev });
+const app = (0, next_1.default)({ dev } || { prod });
 const handle = app.getRequestHandler();
 app.prepare().then(() => {
     const server = (0, express_1.default)();
