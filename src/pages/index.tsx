@@ -24,7 +24,7 @@ export default function Home() {
   // };
   const handleData = async () => {
     try {
-      const { data } = await axios.get(`http://localhost:3000/getRequest`);
+      const { data } = await axios.get(`/getRequest`);
       console.log(JSON.parse(data));
     } catch (e) {
       console.log(e);
