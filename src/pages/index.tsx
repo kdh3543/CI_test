@@ -25,7 +25,7 @@ export default function Home() {
   const handleData = async () => {
     try {
       const { data } = await axios.get("/getRequest");
-      console.log(JSON.parse(data));
+      console.log(data);
     } catch (e) {
       console.log(e);
     }
