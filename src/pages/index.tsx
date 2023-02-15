@@ -34,12 +34,10 @@ export default function Home() {
   };
 
   const frontHandle = async () => {
+    console.log("시작전");
     const result = await axios({
       url,
       method: "get",
-      headers: {
-        "Content-Type": "application/json",
-      },
     });
     console.log("??됐다고?");
     console.log(result);
