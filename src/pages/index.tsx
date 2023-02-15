@@ -8,21 +8,48 @@ import { useEffect } from "react";
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
-  // const urlKey =
-  //   "W87DOAeFblCeoq76UkfcBttIcSgClKzxgmr7P9SxT4dV0s0ugyH1yPAa16ZvPLPNJ5Hpn/Fi7vEVeNZb8DvQQQ==";
-  // const apiUrl =
-  //   "http://openapi.molit.go.kr/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcNrgTrade";
-  // const url = `${apiUrl}?serviceKey=${urlKey}&LAWD_CD=11110&DEAL_YMD=202212`;
-  // // https://cors-anywhere.herokuapp.com/
-  // const handleData = async () => {
-  //   await axios({
-  //     url,
-  //     method: "get",
-  //   }).then((res) => {
-  //     console.log(res.data);
-  //   });
-  // };
-  const handleData = async () => {
+  const urlKey =
+    "W87DOAeFblCeoq76UkfcBttIcSgClKzxgmr7P9SxT4dV0s0ugyH1yPAa16ZvPLPNJ5Hpn/Fi7vEVeNZb8DvQQQ==";
+  const apiUrl =
+    "http://openapi.molit.go.kr/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcNrgTrade";
+  const url = `${apiUrl}?serviceKey=${urlKey}&LAWD_CD=11110&DEAL_YMD=202212`;
+  // https://cors-anywhere.herokuapp.com/
+  const openaiTest = async () => {
+    const apiKey = "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";
+    const result = await axios({
+      method: "get",
+      url: "https://api.openai.com/v1/completions",
+      data: {
+        model: "text-davinci-003",
+        prompt: "hello",
+        temperature: 0,
+        max_tokens: 1,
+      },
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${apiKey}`,
+      },
+    });
+    console.log(result);
+  };
+
+  const frontHandle = async () => {
+    const result = await axios({
+      url: "http://openapi.molit.go.kr/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcNrgTrade?serviceKey=W87DOAeFblCeoq76UkfcBttIcSgClKzxgmr7P9SxT4dV0s0ugyH1yPAa16ZvPLPNJ5Hpn%2FFi7vEVeNZb8DvQQQ%3D%3D&stdt=2022",
+      method: "get",
+      // headers: {
+      //   "Content-Type": "application/json",
+      //   Authorization: `Bearer ${urlKey}`,
+      // },
+      // data: {
+      //   LAWD_CD: 1111,
+      //   DEAL_YMD: 202212,
+      // },
+    });
+    console.log("??됐다고?");
+    console.log(result);
+  };
+  const expressHandle = async () => {
     try {
       const { data } = await axios.get(`/getRequest`);
       console.log(JSON.parse(data));
@@ -51,8 +78,9 @@ export default function Home() {
 
   useEffect(() => {
     console.log("helllllloooo222dsfsdfsdfsdfsdf22");
+    openaiTest();
     expressTest();
-    handleData();
+    expressHandle();
   }, []);
   return (
     <>
@@ -63,7 +91,9 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
-        <button onClick={handleData}>testtesttesfewfesfsfts</button>
+        <button onClick={expressHandle}>expressHandle</button>
+        <br />
+        <button onClick={frontHandle}>frontHandle</button>
       </main>
     </>
   );
