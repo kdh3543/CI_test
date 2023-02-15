@@ -26,7 +26,7 @@ export default function Home() {
     try {
       console.log(process.env.PUBLIC_URL);
       const { data } = await axios.get(
-        `https://master.dgnto816nv0gi.amplifyapp.com//getRequest`
+        `https://master.dgnto816nv0gi.amplifyapp.com/getRequest`
       );
       console.log(data);
     } catch (e) {
