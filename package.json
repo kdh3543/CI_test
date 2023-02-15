@@ -7,7 +7,7 @@
     "build:next": "next build",
     "build:server": "tsc --project tsconfig.server.json",
     "build": "npm run build:next && npm run build:server",
-    "start": "NODE_ENV=production ts-node server/server.ts",
+    "start": "NODE_ENV=production PORT=3000 ts-node server/server.ts",
     "lint": "next lint"
   },
   "dependencies": {

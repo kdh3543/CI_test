@@ -5,7 +5,8 @@ import cors from "cors";
 import axios from "axios";
 
 const dev = process.env.NODE_ENV !== "production";
-const port = 3000 || process.env.PORT;
+const prod = process.env.NODE_ENV === "production";
+const port = prod ? process.env.PORT : 3000;
 const app = next({ dev });
 
 const handle = app.getRequestHandler();
@@ -30,6 +31,6 @@ app.prepare().then(() => {
   });
 
   server.listen(port, (err?: any) => {
-    console.log("error");
+    console.log("ready on " + port);
   });
 });

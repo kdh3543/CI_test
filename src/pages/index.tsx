@@ -33,6 +33,8 @@ export default function Home() {
 
   useEffect(() => {
     console.log("helllllloooo222dsfsdfsdfsdfsdf22");
+    console.log(process.env.NODE_ENV);
+    console.log(process.env.PORT);
     handleData();
   }, []);
   return (

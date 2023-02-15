@@ -16,7 +16,8 @@ const express_1 = __importDefault(require("express"));
 const next_1 = __importDefault(require("next"));
 const axios_1 = __importDefault(require("axios"));
 const dev = process.env.NODE_ENV !== "production";
-const port = 3000 || process.env.PORT;
+const prod = process.env.NODE_ENV === "production";
+const port = prod ? process.env.PORT : 3000;
 const app = (0, next_1.default)({ dev });
 const handle = app.getRequestHandler();
 app.prepare().then(() => {
@@ -34,6 +35,6 @@ app.prepare().then(() => {
         return handle(req, res);
     });
     server.listen(port, (err) => {
-        console.log("error");
+        console.log("ready on " + port);
     });
 });
