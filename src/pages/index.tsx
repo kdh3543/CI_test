@@ -24,18 +24,26 @@ export default function Home() {
   // };
   const handleData = async () => {
     try {
-      console.log(process.env.NEXT_PUBLIC_URL);
-      const { data } = await axios.get(`http://localhost/getRequest`);
+      const { data } = await axios.get(
+        `${process.env.NEXT_PUBLIC_URL}/getRequest`
+      );
       console.log(JSON.parse(data));
     } catch (e) {
       console.log(e);
     }
   };
+  // const callChatApi = async () => {
+  //   try {
+  //     const { data } = await axios.get(
+  //       `${process.env.NEXT_PUBLIC_URL}/getChatApi`
+  //     );
+  //     console.log("???");
+  //     console.log(JSON.parse(data));
+  //   } catch (err) {}
+  // };
 
   useEffect(() => {
     console.log("helllllloooo222dsfsdfsdfsdfsdf22");
-    console.log(process.env.NODE_ENV);
-    console.log(process.env.PORT);
     handleData();
   }, []);
   return (

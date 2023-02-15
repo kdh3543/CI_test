@@ -3,11 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "ts-node --project tsconfig.server.json server/server.ts",
+    "dev": "ts-node --project tsconfig.server.json src/pages/api/server.ts",
     "build:next": "next build",
     "build:server": "tsc --project tsconfig.server.json",
     "build": "npm run build:next && npm run build:server",
-    "start": "NODE_ENV=production PORT=80 ts-node server/server.ts",
+    "start": "NODE_ENV=production PORT=80 ts-node src/pages/api/server.ts",
     "lint": "next lint"
   },
   "dependencies": {
@@ -22,6 +22,8 @@
     "express": "^4.18.2",
     "isomorphic-unfetch": "^4.0.2",
     "next": "13.1.6",
+    "openai": "^3.1.0",
+    "openai-api": "^1.3.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "typescript": "4.9.5"
