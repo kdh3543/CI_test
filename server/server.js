@@ -14,13 +14,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const next_1 = __importDefault(require("next"));
+const cors_1 = __importDefault(require("cors"));
 const dev = process.env.NODE_ENV !== "production";
 const prod = process.env.NODE_ENV === "production";
 const port = prod ? process.env.PORT : 3000;
-const app = (0, next_1.default)({ dev } || { prod });
+const app = (0, next_1.default)({ dev });
 const handle = app.getRequestHandler();
+const server = (0, express_1.default)();
+server.use((0, cors_1.default)());
 app.prepare().then(() => {
-    const server = (0, express_1.default)();
     server.get("/getRequest", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         console.log("hello");
         // const apiUrl =

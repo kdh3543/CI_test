@@ -7,7 +7,7 @@
     "build:next": "next build",
     "build:server": "tsc --project tsconfig.server.json",
     "build": "npm run build:next && npm run build:server",
-    "start": "NODE_ENV=production PORT=80 ts-node server/server.ts",
+    "start": "ts-node server/server.ts",
     "lint": "next lint"
   },
   "dependencies": {
@@ -20,6 +20,7 @@
     "eslint": "8.34.0",
     "eslint-config-next": "13.1.6",
     "express": "^4.18.2",
+    "isomorphic-unfetch": "^4.0.2",
     "next": "13.1.6",
     "react": "18.2.0",
     "react-dom": "18.2.0",

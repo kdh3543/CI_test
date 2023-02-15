@@ -7,13 +7,12 @@ import axios from "axios";
 const dev = process.env.NODE_ENV !== "production";
 const prod = process.env.NODE_ENV === "production";
 const port = prod ? process.env.PORT : 3000;
-const app = next({ dev } || { prod });
+const app = next({ dev });
 
 const handle = app.getRequestHandler();
-
+const server = express();
+server.use(cors());
 app.prepare().then(() => {
-  const server = express();
-
   server.get("/getRequest", async (req, res) => {
     console.log("hello");
     // const apiUrl =
@@ -24,6 +23,7 @@ app.prepare().then(() => {
     // const result = await axios.get(url);
     // const data = JSON.stringify(result.data.response.body.items);
     // return res.status(200).json(data);
+
     return res.status(200).json({ data: "hello" });
   });
 

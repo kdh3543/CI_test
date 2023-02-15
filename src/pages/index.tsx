@@ -4,6 +4,7 @@ import { Inter } from "@next/font/google";
 import styles from "@/styles/Home.module.css";
 import axios from "axios";
 import { useEffect } from "react";
+import fetch from "isomorphic-unfetch";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,9 +26,10 @@ export default function Home() {
   const handleData = async () => {
     try {
       console.log(process.env.PUBLIC_URL);
-      const { data } = await axios.get(
-        `https://master.dgnto816nv0gi.amplifyapp.com/getRequest`
-      );
+      const options = {
+        method: "get",
+      };
+      const data = await fetch(`/getRequest`);
       console.log(data);
     } catch (e) {
       console.log(e);
