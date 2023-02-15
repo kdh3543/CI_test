@@ -35,16 +35,11 @@ export default function Home() {
 
   const frontHandle = async () => {
     const result = await axios({
-      url: "http://openapi.molit.go.kr/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcNrgTrade?serviceKey=W87DOAeFblCeoq76UkfcBttIcSgClKzxgmr7P9SxT4dV0s0ugyH1yPAa16ZvPLPNJ5Hpn%2FFi7vEVeNZb8DvQQQ%3D%3D&stdt=2022",
+      url,
       method: "get",
-      // headers: {
-      //   "Content-Type": "application/json",
-      //   Authorization: `Bearer ${urlKey}`,
-      // },
-      // data: {
-      //   LAWD_CD: 1111,
-      //   DEAL_YMD: 202212,
-      // },
+      headers: {
+        "Content-Type": "application/json",
+      },
     });
     console.log("??됐다고?");
     console.log(result);
@@ -78,9 +73,9 @@ export default function Home() {
 
   useEffect(() => {
     console.log("helllllloooo222dsfsdfsdfsdfsdf22");
-    openaiTest();
+    // openaiTest();
     expressTest();
-    expressHandle();
+    // expressHandle();
   }, []);
   return (
     <>
