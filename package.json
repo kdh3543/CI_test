@@ -3,11 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "ts-node --project tsconfig.server.json server/server.ts",
+    "dev": "node server/server.js",
     "build:next": "next build",
     "build:server": "tsc --project tsconfig.server.json",
     "build": "npm run build:next && npm run build:server",
-    "start": "ts-node server/server.ts",
+    "start": "node server/server.js",
     "lint": "next lint"
   },
   "dependencies": {
