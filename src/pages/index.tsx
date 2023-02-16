@@ -11,17 +11,18 @@ export default function Home() {
   const [answer, setAnswer] = useState<any>("");
   const [key, setKey] = useState("");
 
-  // const apiTest = () => {
-  //   const apiUrl =
-  //   "http://openapi.molit.go.kr/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcNrgTrade";
-  //   const urlKey = process.env.NEXT_PUBLIC_URLKEY;
+  const apiTest = async () => {
+    const apiUrl =
+      "http://openapi.molit.go.kr/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcNrgTrade?serviceKey=W87DOAeFblCeoq76UkfcBttIcSgClKzxgmr7P9SxT4dV0s0ugyH1yPAa16ZvPLPNJ5Hpn/Fi7vEVeNZb8DvQQQ==&LAWD_CD=11110&DEAL_YMD=202302";
+    const urlKey = process.env.NEXT_PUBLIC_URLKEY;
 
-  //   const url = `${apiUrl}?serviceKey=${urlKey}&LAWD_CD=11110&DEAL_YMD=202302`;
-  //   const result = await axios({
-  //     method: 'GET',
-  //     url: '?serviceKey=${urlKey}&LAWD_CD=11110&DEAL_YMD=202302'
-  //   })
-  // }
+    // const url = `${apiUrl}?serviceKey=${urlKey}&LAWD_CD=11110&DEAL_YMD=202302`;
+    const result = await axios({
+      method: "GET",
+      url: "https://gfpigaptac5nemt66d6fbbld2u0cazyr.lambda-url.ap-northeast-2.on.aws/",
+    });
+    console.log(result);
+  };
 
   const chatApi = async () => {
     setQuestion(message);
@@ -53,7 +54,9 @@ export default function Home() {
   const submitApi = (e: any) => {
     setKey(e.target.value);
   };
-  const submitApiKey = () => {};
+  useEffect(() => {
+    apiTest();
+  }, []);
   return (
     <>
       <Head>
@@ -74,7 +77,6 @@ export default function Home() {
               type="text"
               placeholder="typing api key"
             />
-            <button onClick={submitApiKey}>submit</button>
           </div>
           <div className={styles.chatBtnBox}>
             <input

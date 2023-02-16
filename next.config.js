@@ -6,8 +6,7 @@ const nextConfig = {
   //   return [
   //     {
   //       resource: "/:path*",
-  //       destination:
-  //         "http://openapi.molit.go.kr/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcNrgTrade/:path*",
+  //       destination: "http://openapi.molit.go.kr/:path*",
   //     },
   //   ];
   // },
