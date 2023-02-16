@@ -11,10 +11,23 @@ export default function Home() {
   const [answer, setAnswer] = useState<any>("");
   const [key, setKey] = useState("");
 
+  // const apiTest = () => {
+  //   const apiUrl =
+  //   "http://openapi.molit.go.kr/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcNrgTrade";
+  //   const urlKey = process.env.NEXT_PUBLIC_URLKEY;
+
+  //   const url = `${apiUrl}?serviceKey=${urlKey}&LAWD_CD=11110&DEAL_YMD=202302`;
+  //   const result = await axios({
+  //     method: 'GET',
+  //     url: '?serviceKey=${urlKey}&LAWD_CD=11110&DEAL_YMD=202302'
+  //   })
+  // }
+
   const chatApi = async () => {
     setQuestion(message);
     const configuration = new Configuration({
-      apiKey: key,
+      // apiKey: key,
+      apiKey: "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",
     });
 
     const openai = new OpenAIApi(configuration);
@@ -28,7 +41,7 @@ export default function Home() {
       presence_penalty: 0,
     });
 
-    console.log(result.data.choices[0].text);
+    console.log(result.data);
     setAnswer(result?.data?.choices[0]?.text);
   };
 
@@ -53,7 +66,7 @@ export default function Home() {
         <div className={styles.chatBox}>
           <div className={styles.chatMsgBox}>
             <div>{question}</div>
-            <div>{answer}</div>
+            <div className={styles.answerBox}>{answer}</div>
           </div>
           <div>
             <input

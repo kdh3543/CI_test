@@ -188,6 +188,9 @@
 .chatBtn:hover {
   cursor: pointer;
 }
+.answerBox {
+  white-space: pre-line;
+}
 
 /* Enable hover only on non-touch devices */
 @media (hover: hover) and (pointer: fine) {
