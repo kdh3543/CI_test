@@ -1,48 +1,41 @@
 import Head from "next/head";
-import Image from "next/image";
 import { Inter } from "@next/font/google";
 import styles from "@/styles/Home.module.css";
 import axios from "axios";
-import { useEffect } from "react";
-
-const inter = Inter({ subsets: ["latin"] });
+import { useEffect, useState } from "react";
+import { Configuration, OpenAIApi } from "openai";
 
 export default function Home() {
-  const urlKey =
-    "W87DOAeFblCeoq76UkfcBttIcSgClKzxgmr7P9SxT4dV0s0ugyH1yPAa16ZvPLPNJ5Hpn/Fi7vEVeNZb8DvQQQ==";
-  const apiUrl =
-    "https://cors-anywhere.herokuapp.com/http://openapi.molit.go.kr/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcNrgTrade";
-  const url = `${apiUrl}?serviceKey=${urlKey}&LAWD_CD=11110&DEAL_YMD=202212`;
-  // https://cors-anywhere.herokuapp.com/
+  const [message, setMessage] = useState("");
+  const [question, setQuestion] = useState("");
+  const [answer, setAnswer] = useState<any>("");
 
-  const frontHandle = async () => {
-    const result = await axios.get("/getRequest");
-    console.log("??됐다고?");
-    console.log(result);
-  };
-  const expressHandle = async () => {
-    try {
-      const { data } = await axios.get(`/getRequest`);
-      console.log(JSON.parse(data));
-    } catch (e) {
-      console.log(e);
-    }
-  };
+  const chatApi = async () => {
+    setQuestion(message);
+    const configuration = new Configuration({
+      apiKey: "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",
+    });
 
-  const expressTest = async () => {
-    try {
-      const { data } = await axios.get("/getTest");
-      console.log(JSON.parse(data));
-    } catch (e) {
-      console.log(e);
-    }
+    const openai = new OpenAIApi(configuration);
+    const result = await openai.createCompletion({
+      model: "text-davinci-002",
+      prompt: message,
+      temperature: 0.7,
+      max_tokens: 256,
+      top_p: 1,
+      frequency_penalty: 0,
+      presence_penalty: 0,
+    });
+
+    console.log(result.data.choices[0].text);
+    setAnswer(result?.data?.choices[0]?.text);
   };
 
-  useEffect(() => {
-    console.log("helllllloooo222dsfsdfsdfsdfsdf22");
-    expressTest();
-    // expressHandle();
-  }, []);
+  const onChatMessage = (e: any) => {
+    console.log(e.target.value);
+    setMessage(e.target.value);
+  };
+
   return (
     <>
       <Head>
@@ -52,9 +45,23 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
-        <button onClick={expressHandle}>expressHandle</button>
-        <br />
-        <button onClick={frontHandle}>frontHandle</button>
+        <div className={styles.chatBox}>
+          <div className={styles.chatMsgBox}>
+            <div>{question}</div>
+            <div>{answer}</div>
+          </div>
+          <div className={styles.chatBtnBox}>
+            <input
+              type="text"
+              placeholder="input chat"
+              className={styles.chatInputBox}
+              onChange={(e) => onChatMessage(e)}
+            />
+            <button onClick={chatApi} className={styles.chatBtn}>
+              expressHandle
+            </button>
+          </div>
+        </div>
       </main>
     </>
   );

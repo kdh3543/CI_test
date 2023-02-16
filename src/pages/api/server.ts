@@ -34,11 +34,11 @@ app.prepare().then(() => {
   server.get("/getChatApi", async (req, res) => {
     console.log("여기로 들어왔음");
     const configuration = new Configuration({
-      apiKey: "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",
+      apiKey: "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",
     });
 
     const openai = new OpenAIApi(configuration);
-    openai
+    const result = await openai
       .createCompletion({
         model: "text-davinci-002",
         prompt: "hello?",
