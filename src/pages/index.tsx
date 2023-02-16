@@ -14,7 +14,7 @@ export default function Home() {
   const chatApi = async () => {
     setQuestion(message);
     const configuration = new Configuration({
-      apiKey: "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",
+      apiKey: key,
     });
 
     const openai = new OpenAIApi(configuration);
