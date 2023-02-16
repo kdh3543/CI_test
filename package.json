@@ -2,6 +2,7 @@
   "name": "citest",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://openapi.molit.go.kr",
   "scripts": {
     "dev": "ts-node --project tsconfig.server.json src/pages/api/server.ts",
     "build:next": "next build",

@@ -2,7 +2,7 @@ import express from "express";
 import next from "next";
 import cors from "cors";
 import axios from "axios";
-import OpenAI from "openai-api";
+import { Configuration, OpenAIApi } from "openai";
 
 const dev = process.env.NODE_ENV !== "production";
 const prod = process.env.NODE_ENV === "production";
@@ -12,6 +12,7 @@ const app = next({ dev });
 const handle = app.getRequestHandler();
 const server = express();
 server.use(cors());
+
 app.prepare().then(() => {
   server.get("/getRequest", async (req, res) => {
     const apiUrl =
@@ -31,25 +32,27 @@ app.prepare().then(() => {
     return res.status(200).json(JSON.stringify(test));
   });
   server.get("/getChatApi", async (req, res) => {
-    const apiKey = "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";
-    const openai = new OpenAI(apiKey);
-
-    const response = await openai.complete({
-      engine: "davinci",
-      prompt: "this is a test",
-      maxTokens: 5,
-      temperature: 0.9,
-      topP: 1,
-      presencePenalty: 0,
-      frequencyPenalty: 0,
-      bestOf: 1,
-      n: 1,
-      stream: false,
-      stop: ["\n", "testing"],
+    console.log("여기로 들어왔음");
+    const configuration = new Configuration({
+      apiKey: "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",
     });
-    console.log(response.data);
-    const data = JSON.stringify(response.data);
-    return res.status(200).json(data);
+
+    const openai = new OpenAIApi(configuration);
+    openai
+      .createCompletion({
+        model: "text-davinci-002",
+        prompt: "hello?",
+        temperature: 0.7,
+        max_tokens: 256,
+        top_p: 1,
+        frequency_penalty: 0,
+        presence_penalty: 0,
+      })
+      .then((res) => {
+        console.log(res.data);
+      });
+
+    // return res.end(response);
   });
 
   server.all("*", (req, res) => {
