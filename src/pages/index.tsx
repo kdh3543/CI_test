@@ -9,11 +9,12 @@ export default function Home() {
   const [message, setMessage] = useState("");
   const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState<any>("");
+  const [key, setKey] = useState("");
 
   const chatApi = async () => {
     setQuestion(message);
     const configuration = new Configuration({
-      apiKey: "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",
+      apiKey: "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",
     });
 
     const openai = new OpenAIApi(configuration);
@@ -36,6 +37,10 @@ export default function Home() {
     setMessage(e.target.value);
   };
 
+  const submitApi = (e: any) => {
+    setKey(e.target.value);
+  };
+  const submitApiKey = () => {};
   return (
     <>
       <Head>
@@ -49,6 +54,14 @@ export default function Home() {
           <div className={styles.chatMsgBox}>
             <div>{question}</div>
             <div>{answer}</div>
+          </div>
+          <div>
+            <input
+              onChange={(e) => submitApi(e)}
+              type="text"
+              placeholder="typing api key"
+            />
+            <button onClick={submitApiKey}>submit</button>
           </div>
           <div className={styles.chatBtnBox}>
             <input
