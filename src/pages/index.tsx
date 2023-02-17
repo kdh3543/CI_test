@@ -4,56 +4,68 @@ import styles from "@/styles/Home.module.css";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Configuration, OpenAIApi } from "openai";
+import { Button, Flex, Input } from "@chakra-ui/react";
 
 export default function Home() {
   const [message, setMessage] = useState("");
   const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState<any>("");
-  const [key, setKey] = useState("");
+  const [date, setDate] = useState("");
 
   const apiTest = async () => {
-    const apiUrl =
-      "http://openapi.molit.go.kr/OpenAPI_ToolInstallPackage/service/rest/RTMSOBJSvc/getRTMSDataSvcNrgTrade?serviceKey=W87DOAeFblCeoq76UkfcBttIcSgClKzxgmr7P9SxT4dV0s0ugyH1yPAa16ZvPLPNJ5Hpn/Fi7vEVeNZb8DvQQQ==&LAWD_CD=11110&DEAL_YMD=202302";
-    const urlKey = process.env.NEXT_PUBLIC_URLKEY;
-
-    // const url = `${apiUrl}?serviceKey=${urlKey}&LAWD_CD=11110&DEAL_YMD=202302`;
+    const date = "202212";
     const result = await axios({
-      method: "GET",
-      url: "https://gfpigaptac5nemt66d6fbbld2u0cazyr.lambda-url.ap-northeast-2.on.aws/",
+      method: "POST",
+      url: "https://e82fpq79k3.execute-api.ap-northeast-1.amazonaws.com/default/real_estate_function",
+      data: {
+        date: 202212,
+      },
     });
     console.log(result);
   };
 
-  const chatApi = async () => {
-    setQuestion(message);
-    const configuration = new Configuration({
-      // apiKey: key,
-      apiKey: "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",
+  const fixData = (e: any) => {
+    const { value } = e.target;
+    setDate(value);
+  };
+
+  const callApi = async () => {
+    const result = await axios({
+      method: "POST",
     });
-
-    const openai = new OpenAIApi(configuration);
-    const result = await openai.createCompletion({
-      model: "text-davinci-002",
-      prompt: message,
-      temperature: 0.7,
-      max_tokens: 256,
-      top_p: 1,
-      frequency_penalty: 0,
-      presence_penalty: 0,
-    });
-
-    console.log(result.data);
-    setAnswer(result?.data?.choices[0]?.text);
+    console.log(date);
   };
 
-  const onChatMessage = (e: any) => {
-    console.log(e.target.value);
-    setMessage(e.target.value);
-  };
+  // const chatApi = async () => {
+  //   setQuestion(message);
+  //   const configuration = new Configuration({
+  //     // apiKey: key,
+  //     apiKey: "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",
+  //   });
 
-  const submitApi = (e: any) => {
-    setKey(e.target.value);
-  };
+  //   const openai = new OpenAIApi(configuration);
+  //   const result = await openai.createCompletion({
+  //     model: "text-davinci-002",
+  //     prompt: message,
+  //     temperature: 0.7,
+  //     max_tokens: 256,
+  //     top_p: 1,
+  //     frequency_penalty: 0,
+  //     presence_penalty: 0,
+  //   });
+
+  //   console.log(result.data);
+  //   setAnswer(result?.data?.choices[0]?.text);
+  // };
+
+  // const onChatMessage = (e: any) => {
+  //   console.log(e.target.value);
+  //   setMessage(e.target.value);
+  // };
+
+  // const submitApi = (e: any) => {
+  //   setKey(e.target.value);
+  // };
   useEffect(() => {
     apiTest();
   }, []);
@@ -71,7 +83,7 @@ export default function Home() {
             <div>{question}</div>
             <div className={styles.answerBox}>{answer}</div>
           </div>
-          <div>
+          {/* <div>
             <input
               onChange={(e) => submitApi(e)}
               type="text"
@@ -88,7 +100,13 @@ export default function Home() {
             <button onClick={chatApi} className={styles.chatBtn}>
               expressHandle
             </button>
-          </div>
+          </div> */}
+          <Flex>
+            <Input type={"text"} onChange={(e) => fixData(e)} />
+            <Button ml={5} onClick={callApi}>
+              call
+            </Button>
+          </Flex>
         </div>
       </main>
     </>
